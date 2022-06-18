@@ -1,9 +1,12 @@
 package com.cognizant.product.cmd.api.config;
 
+import com.cognizant.core.configuration.AppMessageQueueConfig;
 import com.cognizant.product.cmd.api.exceptoins.StorageException;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,8 +39,14 @@ public class AppProperty {
         }
     }
 
-/*    @Bean
-    public AuctionMessageQueueConfig mQSellerConfig(){
-        return new AuctionMessageQueueConfig();
-    }*/
+    @Bean
+    public CommonsMultipartResolver filterMultipartResolver(){
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        return resolver;
+    }
+
+    @Bean
+    public AppMessageQueueConfig mQSellerConfig(){
+        return new AppMessageQueueConfig();
+    }
 }
